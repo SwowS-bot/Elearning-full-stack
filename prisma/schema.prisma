@@ -10,3 +10,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  role     UserRole @default(LEARNER)
+  courses  Course[]
+}
+
+model Course {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  lectures Lecture[]
+  users    User[]
+}
+
+model Lecture {
+  id        Int    @id @default(autoincrement())
+  name      String
+  videoUrl  String
+  slideUrl  String
+  courseId  Int
+  course    Course @relation(fields: [courseId], references: [id])
+}
+
+enum UserRole {
+  ADMIN   // Admin user, has all permissions
+  LEARNER // Learner user, can register and view courses
+}
