@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
+  id       String   @id @default(cuid())
+  email    String   @unique
   password String
   role     UserRole @default(LEARNER)
   courses  Course[]
@@ -26,15 +26,15 @@ model Course {
 }
 
 model Lecture {
-  id        Int    @id @default(autoincrement())
-  name      String
-  videoUrl  String
-  slideUrl  String
-  courseId  Int
-  course    Course @relation(fields: [courseId], references: [id])
+  id       Int    @id @default(autoincrement())
+  name     String
+  videoUrl String
+  slideUrl String
+  courseId Int
+  course   Course @relation(fields: [courseId], references: [id])
 }
 
 enum UserRole {
-  ADMIN   // Admin user, has all permissions
+  ADMIN // Admin user, has all permissions
   LEARNER // Learner user, can register and view courses
 }

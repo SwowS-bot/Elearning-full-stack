@@ -47,7 +47,7 @@ const Navbar = () => {
             className="p-1 rounded-md"
           />
         )}
-        <Link href="/Login" className="p-2 bg-white rounded-xl text-blue-500">
+        <Link href="/SignUp" className="p-2 bg-white rounded-xl text-blue-500">
           Login/SignUp
         </Link>
       </div>
