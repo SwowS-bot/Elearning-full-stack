@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import { signUp } from "../actions/users/signUp";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
   const handleSubmit = async () => {
-    console.log("handle submit");
+    setMessage("Signing up...");
+    const message = await signUp(email, password);
+    setMessage(message);
   };
   return (
     <div className="flex flex-col gap-4 bg-gray-400 p-4">

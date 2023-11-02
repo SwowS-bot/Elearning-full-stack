@@ -3,7 +3,7 @@ import nextAuth, { AuthOptions, User, Account, Profile } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import NextAuth from "next-auth/next";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken'
 import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
