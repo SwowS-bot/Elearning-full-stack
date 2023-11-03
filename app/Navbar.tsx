@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <nav className="flex items-center justify-between p-6 bg-black">
@@ -47,12 +49,35 @@ const Navbar = () => {
             className="p-1 rounded-md"
           />
         )}
-        <Link href="/SignIn" className="p-2 bg-white rounded-xl text-blue-500">
-          SignIn
-        </Link>
-        <Link href="/SignUp" className="p-2 bg-white rounded-xl text-blue-500">
-          SignUp
-        </Link>
+
+        {session && session.user?.email ? (
+          <>
+            <p>
+              <b className="text-white">Signed in as {session.user?.email}</b>
+            </p>
+            <Link
+              href="/SignOut"
+              className="p-2 bg-white rounded-xl text-blue-500"
+            >
+              SignOut
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/SignIn"
+              className="p-2 bg-white rounded-xl text-blue-500"
+            >
+              SignIn
+            </Link>
+            <Link
+              href="/SignUp"
+              className="p-2 bg-white rounded-xl text-blue-500"
+            >
+              SignUp
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
