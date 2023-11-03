@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { signUp } from "../actions/users/signUp";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
@@ -15,16 +15,30 @@ const SignInForm = () => {
 
   const handleSubmit = async () => {
     setMessage("Signing in...");
-    const message = await signUp(email, password);
+    try {
+      const signInResponse = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (!signInResponse || signInResponse.ok !== true) {
+        setMessage("Invalid credentials");
+      } else {
+        router.refresh();
+      }
+    } catch (err) {
+      console.log(err);
+    }
     setMessage(message);
   };
 
   useEffect(() => {
-    if(status === "authenticated"){
-        router.refresh()
-        router.push('/')
+    if (status === "authenticated") {
+      router.refresh();
+      router.push("/");
     }
-  })
+  }, [status]);
 
   return (
     <div className="flex flex-col gap-4 bg-gray-400 p-4">
