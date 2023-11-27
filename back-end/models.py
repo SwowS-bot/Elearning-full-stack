@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    id = db.Colum(db.String(191), primary_key = True)
+    id = db.Column(db.String(191), primary_key = True)
     email = db.Column(db.String(191), unique=True)
     password = db.Column(db.String(191))
     role = db.Column(db.Enum('ADMIN', 'LEARNER'), default='LEARNER')
