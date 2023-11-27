@@ -10,3 +10,8 @@ Courses_Schema = CourseSchema(many = True)
 Lecture_Schema = LectureSchema()
 Lectures_Schema = LectureSchema(many = True)
 
+@bp.route('/user', methods = ['GET'])
+def get_User():
+    all_User = User.query.all()
+    result = Users_Schema.dump(all_User)
+    return jsonify(result)
