@@ -28,7 +28,7 @@ const Navbar = () => {
             onClick={() => setShowDropdown(!showDropdown)}
             className="text-white"
           >
-            Manage
+            Manager
           </button>
           {showDropdown && (
             <div className="absolute left-0 mt-2 w-32 bg-white text-black p-2 rounded-md flex flex-col">
